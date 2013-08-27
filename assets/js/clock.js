@@ -411,12 +411,16 @@ var Clock = {
       Clock.renderDaytime(Clock.MYCLOCKS[t]);
     }
 
-    window.setInterval(function () {
+    /*window.setInterval(function () {
       Clock.UTC = new Date(Clock.UTC.getTime() + 1e3);
       for (var e in Clock.MYCLOCKS) {
         Clock.renderDaytime(Clock.MYCLOCKS[e]);
       }
-    }, 18e2);
+    }, 18e2);*/
+    Clock.UTC = new Date(Clock.UTC.getTime() + 1e3);
+    for (var e in Clock.MYCLOCKS) {
+      Clock.renderDaytime(Clock.MYCLOCKS[e]);
+    }
   },
   initClocks:function () {
     Clock.UI.clocks.children().remove();
@@ -477,56 +481,54 @@ var Clock = {
     c.find('.label-time').html(a.pad(2) + ":" + t.getUTCMinutes().pad(2) + f);
     c.find('.label-date').html(t.getUTCDate() + " " + this.MONTHS[t.getUTCMonth()].substring(0, 3));
 
-    with(r) {
-      canvas.width = i;
-      canvas.height = s;
-      clearRect(0, 0, i, s);
-      save();
-      restore();
-      translate(i / 2, s / 2);
-      rotate(-Math.PI / 2);
-      lineWidth = u;
-      save();
-      restore();
-      strokeStyle = n.ticks;
-      for (var c = 0; c < 12; c++) {
-        beginPath();
-        rotate(Math.PI / 6);
-        moveTo(o - Math.ceil(o * .1), 0);
-        lineTo(o, 0);
-        stroke()
-      }
-      restore();
-      save();
-      rotate(Math.PI / 6 * d + Math.PI / 360 * h + Math.PI / 21600 * p);
-      lineWidth = u;
-      beginPath();
-      moveTo(0, 0);
-      lineTo(Math.ceil(o * .55), 0);
-      stroke();
-      restore();
-      save();
-      rotate(Math.PI / 30 * h + Math.PI / 1800 * p);
-      beginPath();
-      moveTo(0, 0);
-      lineTo(Math.ceil(o * .8), 0);
-      stroke();
-      restore();
-      save();
-      rotate(p * Math.PI / 30);
-      strokeStyle = "#ff0000";
-      fillStyle = "#ff0000";
-      lineWidth = 2;
-      beginPath();
-      moveTo(-Math.ceil(o * .2), 0);
-      lineTo(o - Math.ceil(o * .1), 0);
-      stroke();
-      beginPath();
-      arc(0, 0, Math.ceil(o * .06), 0, Math.PI * 2, true);
-      fill();
-      restore();
-      save();
+    r.canvas.width = i;
+    r.canvas.height = s;
+    r.clearRect(0, 0, i, s);
+    r.save();
+    r.restore();
+    r.translate(i / 2, s / 2);
+    r.rotate(-Math.PI / 2);
+    r.lineWidth = u;
+    r.save();
+    r.restore();
+    r.strokeStyle = n.ticks;
+    for (var c = 0; c < 12; c++) {
+      r.beginPath();
+      r.rotate(Math.PI / 6);
+      r.moveTo(o - Math.ceil(o * .1), 0);
+      r.lineTo(o, 0);
+      r.stroke()
     }
+    r.restore();
+    r.save();
+    r.rotate(Math.PI / 6 * d + Math.PI / 360 * h + Math.PI / 21600 * p);
+    r.lineWidth = u;
+    r.beginPath();
+    r.moveTo(0, 0);
+    r.lineTo(Math.ceil(o * .55), 0);
+    r.stroke();
+    r.restore();
+    r.save();
+    r.rotate(Math.PI / 30 * h + Math.PI / 1800 * p);
+    r.beginPath();
+    r.moveTo(0, 0);
+    r.lineTo(Math.ceil(o * .8), 0);
+    r.stroke();
+    r.restore();
+    r.save();
+    r.rotate(p * Math.PI / 30);
+    r.strokeStyle = "#ff0000";
+    r.fillStyle = "#ff0000";
+    r.lineWidth = 2;
+    r.beginPath();
+    r.moveTo(-Math.ceil(o * .2), 0);
+    r.lineTo(o - Math.ceil(o * .1), 0);
+    r.stroke();
+    r.beginPath();
+    r.arc(0, 0, Math.ceil(o * .06), 0, Math.PI * 2, true);
+    r.fill();
+    r.restore();
+    r.save();
   },
   loadMyClocks:function () {
     this.MYCLOCKS = [];
